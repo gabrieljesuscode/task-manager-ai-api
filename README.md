@@ -1,121 +1,68 @@
 # Task Manager AI API
 
-A RESTful API for managing tasks, built with **FastAPI**, **SQLAlchemy**, and **PostgreSQL**.
+A **RESTful Task Manager API** built with **FastAPI**, **SQLAlchemy**, and **PostgreSQL**.
 
-This project is the Python backend version of my original **Task Manager AI**, which was first developed with **Java Spring Boot**. The goal was to rebuild the same application while learning the Python backend ecosystem and its best practices.
+This project was developed to explore the Python backend ecosystem while applying modern backend development practices such as ORM mapping, database migrations, dependency injection, automated testing, and API documentation.
 
-<img width="1707" height="545" alt="image" src="https://github.com/user-attachments/assets/5229cf2a-0abd-477f-93a0-8e7ebbc7096e" />
+<img width="1707" height="545" alt="Task Manager AI API" src="https://github.com/user-attachments/assets/5229cf2a-0abd-477f-93a0-8e7ebbc7096e" />
 
 ## Features
 
-- CRUD operations for tasks
+- Full CRUD operations for tasks
 - PostgreSQL database integration
 - SQLAlchemy ORM
-- Database versioning with Alembic
-- Environment variable support with `.env`
-- Interactive API documentation with Swagger UI (`/docs`)
+- Database migrations with Alembic
+- Automated testing with Pytest
+- Interactive Swagger documentation
+- Environment variables with `.env`
 
 ## Tech Stack
 
 - Python
 - FastAPI
-- SQLAlchemy 2.0
+- SQLAlchemy
 - PostgreSQL
 - Alembic
 - Pydantic
-- Python-dotenv
-- Uvicorn
+- Pytest
 
 ## Getting Started
 
-### 1. Clone the repository
-
 ```bash
-git clone https://github.com/your-username/task-manager-ai-api.git
+git clone https://github.com/gabrieljesuscode/task-manager-ai-api.git
 cd task-manager-ai-api
-```
 
-### 2. Create a virtual environment
-
-```bash
 python -m venv .venv
-```
 
-Activate it:
-
-**Windows**
-
-```bash
+# Windows
 .venv\Scripts\activate
-```
 
-**Linux / macOS**
-
-```bash
+# Linux / macOS
 source .venv/bin/activate
-```
 
-### 3. Install dependencies
-
-```bash
 pip install -r requirements.txt
-```
 
-### 4. Configure environment variables
+# Create a .env file with your DATABASE_URL
 
-Create a `.env` file:
-
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/taskdb
-```
-
-### 5. Run database migrations
-
-```bash
 alembic upgrade head
-```
 
-### 6. Start the server
-
-```bash
 uvicorn app.main:app --reload
 ```
 
 The API will be available at:
 
-```
-http://localhost:8000
-```
-
-Swagger documentation:
-
-```
-http://localhost:8000/docs
-```
+- http://localhost:8000
+- http://localhost:8000/docs
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
+|---------|----------|-------------|
 | GET | `/tasks` | List all tasks |
 | GET | `/tasks/{task_id}` | Get a task by ID |
-| POST | `/tasks` | Create a new task |
+| POST | `/tasks` | Create a task |
 | PUT | `/tasks/{task_id}` | Update a task |
 | DELETE | `/tasks/{task_id}` | Delete a task |
-
-## Project Structure
-
-```text
-app/
-├── database/
-├── models/
-├── routers/
-├── schemas/
-└── main.py
-
-alembic/
-requirements.txt
-```
 
 ## Future Improvements
 

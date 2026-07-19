@@ -18,7 +18,7 @@ def get_tasks(db: Session = Depends(get_db)):
 
 
 @router.get("/tasks/{task_id}")
-def get_task(task_id: int, db: Session = Depends(get_db)):
+def get_one_task(task_id: int, db: Session = Depends(get_db)):
 
     task = db.get(Task, task_id)
 
