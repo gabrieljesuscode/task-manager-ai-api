@@ -4,6 +4,8 @@ A RESTful API for managing tasks, built with **FastAPI**, **SQLAlchemy**, and **
 
 This project is the Python backend version of my original **Task Manager AI**, which was first developed with **Java Spring Boot**. The goal was to rebuild the same application while learning the Python backend ecosystem and its best practices.
 
+<img width="1707" height="545" alt="image" src="https://github.com/user-attachments/assets/5229cf2a-0abd-477f-93a0-8e7ebbc7096e" />
+
 ## Features
 
 - CRUD operations for tasks
