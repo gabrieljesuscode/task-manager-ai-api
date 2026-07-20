@@ -1,13 +1,16 @@
 import os
+
 import json
 
 from fastapi import HTTPException
 from mistralai.client import Mistral
 from app.models.task import Task
 
+from dotenv import load_dotenv
+load_dotenv()
 
 def make_task_string(index: int, task: Task):
-    return f"Tarefa{index}: \nTítulo Da Tarefa: {task.title}. \nExplicação da Tarefa: {task.description}"
+    return f"Tarefa{index}: \n ID da tarefa{index}: {task.id} \nCategoria da Tarefa{index}: {task.category} \nTítulo Da Tarefa{index}: {task.title}. \nExplicação da Tarefa{index}: {task.description}"
 
 
 
@@ -15,7 +18,7 @@ def make_task_string(index: int, task: Task):
 def categorize_tasks(tasks: list[Task]):
 
 
-    api_key = os.environ["MISTRAL_API_KEY"]
+    api_key = os.getenv("MISTRAL_API_KEY")
 
     if not api_key:
         raise HTTPException(
@@ -42,9 +45,45 @@ def categorize_tasks(tasks: list[Task]):
                 nome apenas uma palavra. Pode usar acentuação. Lembre-se que só pode haver 3 categorias no máximo, 
                 e cada tarefa deve pertencer a apenas uma categoria. Mantenha uma lógica para que no próximo prompt a IA 
                 possa categorizar novas tarefas usando as mesmas categorias criadas nesse prompt.
-                Não pode usar essas categorias: "Outros, Diversos, Vários, Tarefas" e sinônimos dessas.
+                Você deve classificar cada tarefa utilizando apenas uma das categorias abaixo.
+
+                Categorias permitidas:
+                - Estudos
+                - Trabalho
+                - Casa
+                - Compras
+                - Saúde
+                - Finanças
+                - Exercícios
+                - Lazer
+                - Tecnologia
+                - Projetos
+                - Viagem
+                - Família
+                - Documentos
+
+                Não crie novas categorias.
+                Cada tarefa deve pertencer a apenas uma categoria.
+                Escolha a categoria que melhor representa o objetivo principal da tarefa.
+
+
+                Exemplos:
+
+                "Lavar a louça" -> Casa
+                "Limpar o banheiro" -> Casa
+                "Varrer a garagem" -> Casa
+
+                "Trocar o óleo do carro" -> Manutenção
+
+                "Comprar arroz" -> Compras
+                "Comprar pasta de dente" -> Compras
+
+                "Estudar FastAPI" -> Estudos
+                
+                Não pode usar essas categorias: "Outros, Geral, Diversos, Vários, Tarefas" e sinônimos dessas.
+                
                 Responda **exclusivamente** com um objeto JSON no formato:
-                {{"Categoria1": ["TítuloDaTarefa1", "TítuloDaTarefa2"], "Categoria2": ["TítuloDaTarefa3"]}}
+                {{"Categoria1": ["IdDaTarefa1", "IdDaTarefa2"], "Categoria2": ["IdDaTarefa3"]}}
 
                 Tarefas:
                 {tasks_string}
@@ -61,7 +100,7 @@ def categorize_tasks(tasks: list[Task]):
 
     content = content.strip()
     if not type(content) == str:
-        return ""
+        return {}
     
 
     try:

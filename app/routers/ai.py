@@ -22,9 +22,21 @@ def get_categories(db: Session = Depends(get_db)):
             detail="No tasks found."
         )
     
-    
     categories = categorize_tasks(tasks)
 
-    return categories
+
+    # Loop para atualizar o banco de dados com as informações certas
+    for category, task_ids in categories.items():
+        for task_id in task_ids:
+            task = db.query(Task).filter(Task.id == int(task_id)).first()
+
+            if task: 
+                task.category = category
+    
+
+
+    db.commit()
+
+    return db.query(Task).all()
 
 

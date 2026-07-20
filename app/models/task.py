@@ -12,3 +12,4 @@ class Task(Base):
     title: Mapped[str] = mapped_column(String(255))
     description: Mapped[str] = mapped_column(String(255))
     completed: Mapped[bool] = mapped_column(Boolean, default=False)
+    category: Mapped[str | None] = mapped_column(nullable=True)
