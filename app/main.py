@@ -8,6 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.tasks import router as tasks_router
 from app.routers.ai import router as ai_categorize_router
 
+from app.database.connection import engine, Base
+import app.models.task
+
 app = FastAPI() 
 
 app.add_middleware(
