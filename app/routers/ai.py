@@ -8,6 +8,7 @@ from app.models.task import Task
 from app.ai.service import categorize_tasks
 
 
+
 router = APIRouter()
 
 
@@ -29,7 +30,7 @@ def get_categories(db: Session = Depends(get_db)):
     for category, task_ids in categories.items():
         for task_id in task_ids:
             task = db.query(Task).filter(Task.id == int(task_id)).first()
-
+            
             if task: 
                 task.category = category
     

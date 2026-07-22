@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def make_task_string(index: int, task: Task):
-    return f"Tarefa{index}: \n ID da tarefa{index}: {task.id} \nCategoria da Tarefa{index}: {task.category} \nTítulo Da Tarefa{index}: {task.title}. \nExplicação da Tarefa{index}: {task.description}"
+    return f"Tarefa{index}: \n ID da tarefa{index}: {task.id} \nTítulo Da Tarefa{index}: {task.title}. \nExplicação da Tarefa{index}: {task.description}"
 
 
 
@@ -41,9 +41,9 @@ def categorize_tasks(tasks: list[Task]):
                 "role": "user",
                 "content":
                 f"""
-                Agrupe as tarefas abaixo em 1 a 3 categorias genéricas, cada categoria deve ter em seu 
-                nome apenas uma palavra. Pode usar acentuação. Lembre-se que só pode haver 3 categorias no máximo, 
-                e cada tarefa deve pertencer a apenas uma categoria. Mantenha uma lógica para que no próximo prompt a IA 
+                Agrupe as tarefas abaixo em categorias genéricas, cada categoria deve ter em seu 
+                nome apenas uma palavra. Pode usar acentuação. Lembre-se que 
+                cada tarefa deve pertencer a apenas uma categoria. Mantenha uma lógica para que no próximo prompt a IA 
                 possa categorizar novas tarefas usando as mesmas categorias criadas nesse prompt.
                 Você deve classificar cada tarefa utilizando apenas uma das categorias abaixo.
 
@@ -82,6 +82,16 @@ def categorize_tasks(tasks: list[Task]):
                 
                 Não pode usar essas categorias: "Outros, Geral, Diversos, Vários, Tarefas" e sinônimos dessas.
                 
+                É obrigatório classificar TODAS as tarefas recebidas.
+
+                Nenhum ID pode ser omitido.
+
+                Se alguma tarefa tiver pouca informação, escolha a categoria mais provável com base no título.
+
+                A resposta deve conter exatamente todos os IDs enviados.
+
+                Antes de responder, verifique se todos os IDs aparecem exatamente uma vez no JSON.
+
                 Responda **exclusivamente** com um objeto JSON no formato:
                 {{"Categoria1": ["IdDaTarefa1", "IdDaTarefa2"], "Categoria2": ["IdDaTarefa3"]}}
 

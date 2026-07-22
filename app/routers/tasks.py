@@ -11,7 +11,7 @@ router = APIRouter()
 @router.get("/tasks")
 def get_tasks(db: Session = Depends(get_db)):
 
-    tasks = db.query(Task).all()
+    tasks = db.query(Task).order_by(Task.id.desc()).all()
 
     return tasks
 
@@ -35,7 +35,12 @@ def get_one_task(task_id: int, db: Session = Depends(get_db)):
 
 @router.post("/tasks", status_code=201)
 def create_task(task: TaskCreate, db: Session = Depends(get_db)):
-
+    if not task.title or task.title == "":
+        raise HTTPException(
+            status_code=404,
+            detail="Título da tarefa não adicionado"   
+        )
+    
     new_task = Task(
         title= task.title,
         description=task.description,
