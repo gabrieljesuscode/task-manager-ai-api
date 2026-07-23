@@ -17,6 +17,15 @@ def make_task_string(index: int, task: Task):
 
 def categorize_tasks(tasks: list[Task]):
 
+    
+    needCategories: bool = any(task.category is None for task in tasks)
+
+    if not needCategories:
+        raise HTTPException(
+            status_code=400,
+            detail="All categories are configured"
+        )
+
 
     api_key = os.getenv("MISTRAL_API_KEY")
 
