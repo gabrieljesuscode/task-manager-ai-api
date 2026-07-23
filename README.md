@@ -50,6 +50,8 @@ API Publicada:
 
 https://task-manager-ai-api.vercel.app/docs
 
+Esta API está disponível publicamente apenas para fins de demonstração.
+
 ## Principais endpoints
 
 | Método | Endpoint |
