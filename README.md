@@ -2,6 +2,8 @@
 
 API do Task Manager AI. CRUD de tarefas desenvolvido com FastAPI e PostgreSQL.
 
+Deploy da aplicação com Vercel e Supabase: [https://task-manager-ai-web.vercel.app/](url)
+
 <img width="1707" height="545" alt="Task Manager AI API" src="https://github.com/user-attachments/assets/5229cf2a-0abd-477f-93a0-8e7ebbc7096e" />
 
 ## Stack
